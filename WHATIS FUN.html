@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>What is a Function?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== GLOBAL ===== */
+body{
+  margin:0;
+  font-family:'Poppins','Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#fdf4ff,#ecfeff,#f0fdf4);
+  overflow-x:hidden;
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+.bg{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  overflow:hidden;
+}
+
+/* floating blobs */
+.blob{
+  position:absolute;
+  width:380px;
+  height:380px;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:.45;
+  animation:floatBlob 18s ease-in-out infinite alternate;
+}
+
+.blob.purple{background:#c4b5fd; top:-100px; left:-100px}
+.blob.cyan{background:#67e8f9; bottom:-120px; right:-80px}
+.blob.green{background:#86efac; top:40%; right:-140px}
+
+@keyframes floatBlob{
+  from{transform:translateY(0) translateX(0)}
+  to{transform:translateY(-80px) translateX(60px)}
+}
+
+/* animated grid */
+.grid{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(#00000010 1px, transparent 1px),
+    linear-gradient(90deg,#00000010 1px, transparent 1px);
+  background-size:60px 60px;
+  animation:gridMove 40s linear infinite;
+}
+
+@keyframes gridMove{
+  from{background-position:0 0,0 0}
+  to{background-position:600px 600px,600px 600px}
+}
+
+/* floating math symbols */
+.symbol{
+  position:absolute;
+  font-size:48px;
+  color:#94a3b8;
+  opacity:.15;
+  animation:floatSymbol 14s ease-in-out infinite;
+}
+
+@keyframes floatSymbol{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-40px)}
+  100%{transform:translateY(0)}
+}
+
+/* ===== PAGE ===== */
+.page{
+  max-width:1200px;
+  margin:60px auto;
+  padding:80px;
+  position:relative;
+  z-index:2;
+}
+
+/* ===== TITLE ===== */
+h1{
+  text-align:center;
+  font-size:52px;
+  background:linear-gradient(90deg,#6366f1,#06b6d4,#22c55e);
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:titleDrop 1.4s ease forwards;
+}
+
+@keyframes titleDrop{
+  from{opacity:0; transform:translateY(-60px)}
+  to{opacity:1; transform:none}
+}
+
+.subtitle{
+  text-align:center;
+  font-size:22px;
+  margin-top:16px;
+  color:#334155;
+  opacity:0;
+  animation:fadeIn 1.2s ease forwards;
+  animation-delay:.4s;
+}
+
+@keyframes fadeIn{to{opacity:1}}
+
+/* ===== HEX CARDS ===== */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:60px;
+  margin-top:100px;
+}
+
+.card{
+  position:relative;
+  padding:52px 38px;
+  background:white;
+  clip-path:polygon(
+    25% 0%, 75% 0%,
+    100% 50%,
+    75% 100%, 25% 100%,
+    0% 50%
+  );
+  box-shadow:0 30px 90px rgba(0,0,0,.18);
+  text-align:center;
+  opacity:0;
+  transform:scale(.6) rotate(-25deg);
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  background:linear-gradient(135deg,#6366f1,#06b6d4,#22c55e);
+  filter:blur(18px);
+  z-index:-1;
+  opacity:.55;
+}
+
+.card.show{
+  animation:hexReveal 2s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes hexReveal{
+  0%{opacity:0; transform:scale(.6) rotate(-25deg)}
+  65%{opacity:1; transform:scale(1.1) rotate(6deg)}
+  100%{opacity:1; transform:scale(1) rotate(0)}
+}
+
+.card h2{color:#6366f1}
+.card p{font-size:18px;color:#334155}
+
+/* ===== STRIP ===== */
+.strip{
+  margin:110px 0;
+  padding:70px;
+  background:linear-gradient(120deg,#06b6d4,#22c55e);
+  color:white;
+  transform:skewY(-4deg);
+  border-radius:30px;
+  box-shadow:0 40px 120px rgba(0,0,0,.25);
+  opacity:0;
+}
+
+.strip-content{transform:skewY(4deg); text-align:center}
+
+.strip.show{animation:stripSlide 1.6s ease forwards}
+
+@keyframes stripSlide{
+  from{opacity:0; transform:skewY(-4deg) translateX(-220px)}
+  to{opacity:1; transform:skewY(-4deg) translateX(0)}
+}
+
+/* ===== BUBBLE ===== */
+.bubble{
+  max-width:720px;
+  margin:100px auto;
+  padding:60px;
+  background:radial-gradient(circle at top left,#fff,#f0fdf4);
+  border-radius:50%;
+  box-shadow:0 30px 90px rgba(0,0,0,.18);
+  text-align:center;
+  opacity:0;
+  transform:scale(.5);
+}
+
+.bubble.show{animation:bubblePop 1.7s cubic-bezier(.16,1,.3,1) forwards}
+
+@keyframes bubblePop{
+  0%{opacity:0; transform:scale(.5)}
+  70%{opacity:1; transform:scale(1.12)}
+  100%{opacity:1; transform:scale(1)}
+}
+
+.math{font-size:32px;color:#15803d;font-weight:bold}
+
+/* ===== GRAPH ===== */
+.graph-card{
+  margin-top:120px;
+  padding:60px;
+  background:white;
+  border-radius:30px;
+  box-shadow:0 40px 120px rgba(0,0,0,.22);
+  opacity:0;
+  transform:translateY(140px);
+}
+
+.graph-card.show{animation:graphUp 1.6s ease forwards}
+
+@keyframes graphUp{to{opacity:1; transform:none}}
+
+svg{width:100%; height:320px}
+
+.axis{stroke:#64748b; stroke-width:2}
+
+.curve{
+  fill:none;
+  stroke:#6366f1;
+  stroke-width:3.5;
+  stroke-dasharray:1200;
+  stroke-dashoffset:1200;
+}
+
+.graph-card.show .curve{animation:drawCurve 2.2s ease forwards}
+@keyframes drawCurve{to{stroke-dashoffset:0}}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg">
+  <div class="grid"></div>
+  <div class="blob purple"></div>
+  <div class="blob cyan"></div>
+  <div class="blob green"></div>
+
+  <div class="symbol" style="top:20%; left:10%;">f(x)</div>
+  <div class="symbol" style="top:70%; left:15%;">∫</div>
+  <div class="symbol" style="top:30%; right:10%;">→</div>
+  <div class="symbol" style="bottom:15%; right:20%;">sin</div>
+</div>
+
+<div class="page">
+
+<h1>What is a Function?</h1>
+<div class="subtitle">Each input gives exactly one output</div>
+
+<div class="cards">
+  <div class="card"><h2>📌 Definition</h2><p>A function assigns one unique output to each input.</p></div>
+  <div class="card"><h2>🔁 Mapping</h2><p>Same input can never give two outputs.</p></div>
+  <div class="card"><h2>🧮 Notation</h2><p>Written as <b>f(x)</b>.</p></div>
+</div>
+
+<div class="strip">
+  <div class="strip-content">
+    <h2>⚠ Key Rule</h2>
+    <p style="font-size:20px;">One input → one output</p>
+  </div>
+</div>
+
+<div class="bubble">
+  <div class="math">f(x) = sin x + 1</div>
+  <p style="font-size:20px;margin-top:16px;">Smooth periodic function</p>
+</div>
+
+<div class="graph-card">
+ <h2>📈 Graph of a Function</h2>
+<p>
+Below is the graph of the function <b>y = sin(x) + 1</b>.
+</p>
+
+<svg class="graph" viewBox="0 0 420 300">
+
+  <!-- axes -->
+  <line class="axis" x1="40" y1="240" x2="380" y2="240"/>
+  <line class="axis" x1="40" y1="240" x2="40" y2="30"/>
+
+  <!-- arrows -->
+  <polygon points="380,240 370,235 370,245" fill="#64748b"/>
+  <polygon points="40,30 35,40 45,40" fill="#64748b"/>
+
+  <!-- labels -->
+  <text x="360" y="265" class="label">x</text>
+  <text x="18" y="40" class="label">y</text>
+
+  <!-- curve y = sin(x) + 1 -->
+  <path class="curve"
+    d="M40 160
+       C 90 80, 140 80, 190 160
+       C 240 240, 290 240, 340 160"/>
+
+  <!-- highlighted point -->
+  <circle class="point" cx="190" cy="160" r="5"/>
+  <text x="200" y="148" class="label">(x, f(x))</text>
+
+  <!-- equation -->
+  <text x="230" y="70" fill="#2563eb" font-size="18">
+    y = sin(x) + 1
+  </text>
+</svg>
+</div>
+
+
+<script>
+const items=document.querySelectorAll('.card,.strip,.bubble,.graph-card');
+items.forEach((el,i)=>{
+  setTimeout(()=>el.classList.add('show'),i*600);
+});
+</script>
+
+</body>
+</html>

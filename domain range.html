@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Domain and Range of a Function</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background: linear-gradient(-45deg,
+    #e0f2fe,
+    #fdf2f8,
+    #fefce8,
+    #ecfeff,
+    #f0fdf4
+  );
+  background-size: 400% 400%;
+  animation: bgFade 18s ease infinite;
+  perspective:1600px;
+}
+
+@keyframes bgFade{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+@keyframes bgDrift{
+  0%{background-position:0% 0%, 100% 0%, 50% 100%, 0% 50%}
+  100%{background-position:10% 15%, 90% 20%, 60% 85%, 100% 50%}
+}
+
+.page{
+  max-width:1150px;
+  margin:40px auto;
+  padding:60px;
+  background:#ffffff;
+  border-radius:30px;
+  box-shadow:
+    0 40px 120px rgba(0,0,0,.22),
+    inset 0 0 60px rgba(255,255,255,.6);
+  transform-style:preserve-3d;
+  opacity:0;
+  transform:translateY(80px) scale(.96);
+  animation:pageEnter 1.6s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes pageEnter{
+  0%{opacity:0; transform:translateY(80px) scale(.96)}
+  60%{opacity:1; transform:translateY(-10px) scale(1.02)}
+  100%{opacity:1; transform:none}
+}
+
+h1{
+  text-align:center;
+  font-size:46px;
+  padding:22px 60px;
+  border-radius:30px;
+  border:6px solid #0ea5e9;
+  display:inline-block;
+  background:white;
+  animation:titleDrop 1.4s ease forwards;
+}
+
+@keyframes titleDrop{
+  from{opacity:0; transform:translateY(-60px) scale(.7)}
+  to{opacity:1; transform:none}
+}
+
+.subtitle{
+  text-align:center;
+  font-size:22px;
+  margin:30px 0 70px;
+  opacity:0;
+  animation:fadeUp 1.2s ease forwards;
+  animation-delay:.4s;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(30px)}
+  to{opacity:1; transform:none}
+}
+
+/* ===== CARDS ===== */
+.card{
+  margin-bottom:90px;
+  padding:46px;
+  border-radius:32px;
+  background:
+    linear-gradient(#ffffff,#f0f9ff) padding-box,
+    linear-gradient(135deg,#0ea5e9,#22c55e,#f97316) border-box;
+  border:4px solid transparent;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.18),
+    0 0 0 rgba(0,0,0,0);
+  opacity:0;
+  transform:
+    translateY(200px)
+    rotateX(25deg)
+    rotateY(-15deg)
+    scale(.8);
+  transform-style:preserve-3d;
+  transition:transform .8s ease, box-shadow .8s ease;
+}
+
+.card.show{
+  animation:cardRise 2.3s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+.card:hover{
+  transform:
+    translateY(-16px)
+    rotateX(6deg)
+    rotateY(-6deg)
+    scale(1.03);
+  box-shadow:
+    0 60px 140px rgba(14,165,233,.35),
+    0 0 40px rgba(34,197,94,.25);
+}
+
+@keyframes cardRise{
+  0%{
+    opacity:0;
+    transform:translateY(200px) rotateX(25deg) rotateY(-15deg) scale(.8);
+  }
+  55%{
+    opacity:1;
+    transform:translateY(-30px) rotateX(-10deg) rotateY(8deg) scale(1.08);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) rotateX(0deg) rotateY(0deg) scale(1);
+  }
+}
+  55%{opacity:1; transform:translateY(-24px) scale(1.08) rotateX(-4deg)}
+  100%{opacity:1; transform:none}
+}
+  65%{opacity:1; transform:translateY(-20px) scale(1.06)}
+  100%{opacity:1; transform:none}
+}
+
+h2{
+  font-size:32px;
+  color:#0284c7;
+  margin-bottom:18px;
+}
+
+p{
+  font-size:20px;
+  line-height:1.8;
+}
+
+.highlight{
+  font-weight:bold;
+  color:#0ea5e9;
+}
+
+/* ===== GRAPH ===== */
+.graph{
+  width:100%;
+  height:300px;
+  margin-top:40px;
+}
+
+.axis{stroke:#666; stroke-width:2}
+
+.curve{
+  fill:none;
+  stroke:#7c3aed;
+  stroke-width:3;
+  stroke-dasharray:1000;
+  stroke-dashoffset:1000;
+  animation:curveGlow 4s ease-in-out infinite;
+}
+
+@keyframes curveGlow{
+  0%,100%{filter:drop-shadow(0 0 0 rgba(124,58,237,0))}
+  50%{filter:drop-shadow(0 0 10px rgba(124,58,237,.6))}
+}
+
+.domain{
+  stroke:#16a34a;
+  stroke-width:6;
+  stroke-dasharray:12 10;
+  animation:flowX 2.5s linear infinite;
+}
+
+@keyframes flowX{
+  to{stroke-dashoffset:-44}
+}
+
+.range{
+  stroke:#dc2626;
+  stroke-width:6;
+  stroke-dasharray:12 10;
+  animation:flowY 2.5s linear infinite;
+}
+
+@keyframes flowY{
+  to{stroke-dashoffset:-44}
+}
+
+.card.show .curve{
+  animation:drawCurve 2s ease forwards;
+}
+
+@keyframes drawCurve{to{stroke-dashoffset:0}}
+
+.arrow{
+  fill:#0ea5e9;
+  /* arrow is now fixed (no motion) */
+}
+
+@keyframes arrowPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<center><h1>Domain & Range of a Function</h1></center>
+<div class="subtitle">Understanding inputs and outputs using graphs and motion</div>
+
+<!-- DOMAIN -->
+<div class="card">
+<h2>📌 Domain of a Function</h2>
+<p>
+The <span class="highlight">domain</span> of a function is the set of all possible
+<span class="highlight">input values (x-values)</span> for which the function is defined.
+</p>
+<p>
+From a graph, the domain is obtained by projecting the curve onto the
+<span class="highlight">x-axis</span>.
+</p>
+
+<svg class="graph" viewBox="0 0 420 300">
+  <!-- axes -->
+  <line class="axis" x1="40" y1="260" x2="380" y2="260"/>
+  <line class="axis" x1="40" y1="260" x2="40" y2="30"/>
+
+  <!-- curve y = sin(x) mapped -->
+  <path class="curve" d="M40 160 C 90 60, 140 260, 190 160 C 240 60, 290 260, 340 160"/>
+
+  <!-- domain highlight -->
+  <line class="domain" x1="40" y1="260" x2="340" y2="260"/>
+
+  <!-- arrows -->
+  <polygon class="arrow" points="340,260 330,255 330,265"/>
+
+  <!-- labels -->
+  <text x="170" y="285" fill="#16a34a">Domain (x-values)</text>
+</svg>
+</div>
+
+<!-- RANGE -->
+<div class="card">
+<h2>📊 Range of a Function</h2>
+<p>
+The <span class="highlight">range</span> of a function is the set of all possible
+<span class="highlight">output values (y-values)</span> that the function can produce.
+</p>
+<p>
+From a graph, the range is obtained by projecting the curve onto the
+<span class="highlight">y-axis</span>.
+</p>
+
+<svg class="graph" viewBox="0 0 420 300">
+  <!-- axes -->
+  <line class="axis" x1="40" y1="260" x2="380" y2="260"/>
+  <line class="axis" x1="40" y1="260" x2="40" y2="30"/>
+
+  <!-- curve -->
+  <path class="curve" d="M40 160 C 90 60, 140 260, 190 160 C 240 60, 290 260, 340 160"/>
+
+  <!-- range highlight -->
+  <line class="range" x1="40" y1="60" x2="40" y2="260"/>
+
+  <!-- arrows -->
+  <polygon class="arrow" points="40,60 35,70 45,70"/>
+
+  <!-- labels -->
+  <text x="5" y="160" transform="rotate(-90 5,160)" fill="#dc2626">Range (y-values)</text>
+</svg>
+</div>
+
+<!-- NOTE -->
+<div class="card">
+<h2>🧠 Key Observation</h2>
+<p>
+Every function has a domain, but the range depends on the
+behavior of the function. Different functions may have the same
+ domain but very different ranges.
+</p>
+</div>
+
+</div>
+
+<script>
+const cards=document.querySelectorAll('.card');
+cards.forEach((card,i)=>{
+  setTimeout(()=>card.classList.add('show'), i*750);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Representation of Functions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== GLOBAL ===== */
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ecfeff,#fdf4ff);
+  overflow-x:hidden;
+}
+
+/* ===== FLOATING BACKGROUND BLOBS ===== */
+.blob{
+  position:fixed;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  filter:blur(30px);
+  opacity:.35;
+  animation:blobMove 12s ease-in-out 2;
+}
+
+.b1{background:#22c55e; top:10%; left:5%}
+.b2{background:#6366f1; bottom:15%; right:10%; animation-delay:3s}
+.b3{background:#f59e0b; top:55%; left:60%; animation-delay:6s}
+
+@keyframes blobMove{
+  50%{transform:translate(80px,-60px)}
+}
+
+/* ===== PAGE ===== */
+.page{
+  max-width:1200px;
+  margin:60px auto;
+  padding:70px;
+  background:white;
+  border-radius:40px;
+  box-shadow:0 50px 140px rgba(0,0,0,.25);
+  position:relative;
+  z-index:1;
+}
+
+/* ===== TITLE ===== */
+h1{
+  text-align:center;
+  font-size:48px;
+  padding:26px 90px;
+  border-radius:50px;
+  background:linear-gradient(135deg,#6366f1,#22c55e);
+  color:white;
+  animation:titleDrop 1.4s ease forwards;
+}
+
+@keyframes titleDrop{
+  from{opacity:0; transform:translateY(-80px) scale(.7)}
+  to{opacity:1; transform:none}
+}
+
+.subtitle{
+  text-align:center;
+  font-size:22px;
+  margin:40px 0 90px;
+  opacity:0;
+  animation:fadeUp 1s ease forwards;
+  animation-delay:.4s;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(30px)}
+  to{opacity:1; transform:none}
+}
+
+/* ===== CARD ===== */
+.card{
+  margin-bottom:100px;
+  padding:50px;
+  border-radius:36px;
+  background:
+    linear-gradient(#ffffff,#f8fafc) padding-box,
+    linear-gradient(135deg,#6366f1,#22c55e,#f59e0b) border-box;
+  border:5px solid transparent;
+  box-shadow:0 35px 90px rgba(0,0,0,.22);
+  opacity:0;
+  transform:translateY(120px);
+}
+
+.card.show{
+  animation:cardFloat 1.6s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes cardFloat{
+  60%{opacity:1; transform:translateY(-18px)}
+  100%{opacity:1; transform:none}
+}
+
+h2{font-size:32px; color:#4f46e5}
+p{font-size:20px; line-height:1.9}
+
+/* ===== FUNCTION MACHINE ===== */
+.machine{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
+  margin-top:40px;
+}
+
+.box{
+  padding:18px 28px;
+  border-radius:18px;
+  background:#ecfeff;
+  font-size:20px;
+  font-weight:600;
+  animation:slideIn 1s ease forwards;
+}
+
+.machine-core{
+  padding:30px 50px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#6366f1,#22c55e);
+  color:white;
+  font-size:22px;
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
+  animation:gearSpin 2s ease 1.5;
+}
+
+@keyframes slideIn{
+  from{transform:translateX(-40px); opacity:0}
+  to{transform:none; opacity:1}
+}
+
+@keyframes gearSpin{
+  50%{transform:rotate(3deg) scale(1.05)}
+}
+
+/* ===== MAPPING ===== */
+.mapping{
+  display:flex;
+  justify-content:space-around;
+  margin-top:40px;
+}
+
+.set{
+  padding:20px 26px;
+  border-radius:22px;
+  background:#f0fdf4;
+}
+
+.node{
+  margin:12px 0;
+  padding:10px 20px;
+  border-radius:14px;
+  background:white;
+  box-shadow:0 6px 16px rgba(0,0,0,.15);
+  animation:pulseOnce 1s ease forwards;
+}
+
+@keyframes pulseOnce{
+  50%{transform:scale(1.08)}
+}
+
+/* ===== GRAPH ===== */
+.graph-card{
+  margin-top:120px;
+  padding:60px;
+  background:white;
+  border-radius:30px;
+  box-shadow:0 40px 120px rgba(0,0,0,.22);
+  opacity:0;
+  transform:translateY(140px);
+}
+
+.graph-card.show{animation:graphUp 1.6s ease forwards}
+
+@keyframes graphUp{to{opacity:1; transform:none}}
+
+svg{width:100%; height:320px}
+
+.axis{stroke:#64748b; stroke-width:2}
+
+.curve{
+  fill:none;
+  stroke:#6366f1;
+  stroke-width:3.5;
+  stroke-dasharray:1200;
+  stroke-dashoffset:1200;
+}
+
+.graph-card.show .curve{animation:drawCurve 2.2s ease forwards}
+@keyframes drawCurve{to{stroke-dashoffset:0}}
+
+</style>
+</head>
+
+<body>
+
+<!-- background blobs -->
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+
+<div class="page">
+
+<center><h1>Representation of Functions</h1></center>
+<div class="subtitle">
+Now with motion, flow, and intuition
+</div>
+
+<!-- FUNCTION MACHINE -->
+<div class="card">
+<h2>⚙ Function Machine</h2>
+<p>Input moves through a rule to produce exactly one output.</p>
+
+<div class="machine">
+  <div class="box">x = 3</div>
+  <div>➡</div>
+  <div class="machine-core">f(x) = 2x + 1</div>
+  <div>➡</div>
+  <div class="box">7</div>
+</div>
+</div>
+
+<!-- MAPPING -->
+<div class="card">
+<h2>🔗 Mapping Diagram</h2>
+<p>Each input maps to one output.</p>
+
+<div class="mapping">
+  <div class="set">
+    <b>Domain</b>
+    <div class="node">1</div>
+    <div class="node">2</div>
+    <div class="node">3</div>
+  </div>
+
+  <div class="set">
+    <b>Codomain</b>
+    <div class="node">3</div>
+    <div class="node">5</div>
+  </div>
+</div>
+</div>
+
+<div class="graph-card">
+ <h2>📈 Graph of a Function</h2>
+<p>
+Below is the graph of the function <b>y = sin(x) + 1</b>.
+</p>
+
+<svg class="graph" viewBox="0 0 420 300">
+
+  <!-- axes -->
+  <line class="axis" x1="40" y1="240" x2="380" y2="240"/>
+  <line class="axis" x1="40" y1="240" x2="40" y2="30"/>
+
+  <!-- arrows -->
+  <polygon points="380,240 370,235 370,245" fill="#64748b"/>
+  <polygon points="40,30 35,40 45,40" fill="#64748b"/>
+
+  <!-- labels -->
+  <text x="360" y="265" class="label">x</text>
+  <text x="18" y="40" class="label">y</text>
+
+  <!-- curve y = sin(x) + 1 -->
+  <path class="curve"
+    d="M40 160
+       C 90 80, 140 80, 190 160
+       C 240 240, 290 240, 340 160"/>
+
+  <!-- highlighted point -->
+  <circle class="point" cx="190" cy="160" r="5"/>
+  <text x="200" y="148" class="label">(x, f(x))</text>
+
+  <!-- equation -->
+  <text x="230" y="70" fill="#2563eb" font-size="18">
+    y = sin(x) + 1
+  </text>
+</svg>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.card').forEach((card,i)=>{
+  setTimeout(()=>card.classList.add('show'), i*900);
+});
+</script>
+
+</body>
+</html>

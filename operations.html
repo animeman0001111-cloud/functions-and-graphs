@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Operations on Functions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== GLOBAL ===== */
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(-45deg,
+    #e0f2fe,
+    #fef3c7,
+    #ecfeff,
+    #fdf2f8
+  );
+  background-size:400% 400%;
+  animation:bgShift 18s ease infinite;
+}
+
+@keyframes bgShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ===== PAGE ===== */
+.page{
+  max-width:1100px;
+  margin:50px auto;
+  padding:60px;
+  background:#ffffffee;
+  border-radius:30px;
+  box-shadow:0 40px 120px rgba(0,0,0,.18);
+  animation:pageIn 1.4s ease;
+}
+
+@keyframes pageIn{
+  from{opacity:0; transform:translateY(60px) scale(.95)}
+  to{opacity:1; transform:none}
+}
+
+/* ===== TITLE ===== */
+h1{
+  text-align:center;
+  font-size:46px;
+  padding:20px 60px;
+  border-radius:30px;
+  border:6px solid #6366f1;
+  display:inline-block;
+  background:white;
+}
+
+.subtitle{
+  text-align:center;
+  font-size:22px;
+  margin:30px 0 70px;
+  color:#334155;
+}
+
+/* ===== CARDS ===== */
+.card{
+  margin-bottom:70px;
+  padding:50px;
+  border-radius:28px;
+  color:#1e293b;
+  box-shadow:0 30px 80px rgba(0,0,0,.18);
+  opacity:0;
+  transform:translateY(120px) scale(.9);
+  transition:transform .8s ease, box-shadow .8s ease;
+}
+
+.card.show{
+  opacity:1;
+  transform:none;
+}
+
+.card:hover{
+  transform:translateY(-12px) scale(1.02);
+  box-shadow:0 60px 140px rgba(0,0,0,.25);
+}
+
+/* ===== CARD COLORS ===== */
+.add{
+  background:linear-gradient(135deg,#dcfce7,#bbf7d0);
+}
+.sub{
+  background:linear-gradient(135deg,#fee2e2,#fecaca);
+}
+.mul{
+  background:linear-gradient(135deg,#e0e7ff,#c7d2fe);
+}
+.div{
+  background:linear-gradient(135deg,#fff7ed,#fed7aa);
+}
+
+/* ===== TEXT ===== */
+h2{
+  font-size:32px;
+  margin-bottom:20px;
+}
+
+p{
+  font-size:20px;
+  line-height:1.8;
+}
+
+.formula{
+  margin-top:20px;
+  padding:20px;
+  border-radius:18px;
+  background:rgba(255,255,255,.6);
+  font-size:24px;
+  text-align:center;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+  <center><h1>Operations on Functions</h1></center>
+  <div class="subtitle">
+    Algebraic operations performed on two or more functions
+  </div>
+
+  <!-- ADDITION -->
+  <div class="card add">
+    <h2>➕ Addition of Functions</h2>
+    <p>
+      If <b>f(x)</b> and <b>g(x)</b> are two functions, their sum is defined by
+      adding their outputs for each input.
+    </p>
+    <div class="formula">
+      (f + g)(x) = f(x) + g(x)
+    </div>
+    <p>
+      The domain of (f + g) consists of all values of <b>x</b> that belong to
+      the domains of both <b>f</b> and <b>g</b>.
+    </p>
+  </div>
+
+  <!-- SUBTRACTION -->
+  <div class="card sub">
+    <h2>➖ Subtraction of Functions</h2>
+    <p>
+      Subtraction measures how much one function differs from another at each
+      input value.
+    </p>
+    <div class="formula">
+      (f − g)(x) = f(x) − g(x)
+    </div>
+    <p>
+      The domain is the set of values common to both functions.
+    </p>
+  </div>
+
+  <!-- MULTIPLICATION -->
+  <div class="card mul">
+    <h2>✖️ Multiplication of Functions</h2>
+    <p>
+      The product of two functions is obtained by multiplying their outputs
+      for each input value.
+    </p>
+    <div class="formula">
+      (fg)(x) = f(x) · g(x)
+    </div>
+    <p>
+      This operation is useful in modeling combined effects.
+    </p>
+  </div>
+
+  <!-- DIVISION -->
+  <div class="card div">
+    <h2>➗ Division of Functions</h2>
+    <p>
+      Division compares the outputs of two functions as a ratio.
+    </p>
+    <div class="formula">
+      (f / g)(x) = f(x) / g(x), &nbsp; g(x) ≠ 0
+    </div>
+    <p>
+      The function is undefined wherever <b>g(x) = 0</b>.
+    </p>
+  </div>
+
+</div>
+
+<script>
+const cards = document.querySelectorAll('.card');
+cards.forEach((card,i)=>{
+  setTimeout(()=>{
+    card.classList.add('show');
+  }, i*500);
+});
+</script>
+
+</body>
+</html>

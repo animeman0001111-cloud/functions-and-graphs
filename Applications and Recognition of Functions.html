@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Applications and Recognition of Functions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== GLOBAL ===== */
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(120deg,#f0fdfa,#fff7ed,#fdf2f8);
+  background-size:300% 300%;
+  animation:bgFlow 20s ease infinite;
+}
+
+@keyframes bgFlow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ===== PAGE ===== */
+.page{
+  max-width:1200px;
+  margin:50px auto;
+  padding:60px;
+  background:#ffffffee;
+  border-radius:34px;
+  box-shadow:0 40px 120px rgba(0,0,0,.2);
+}
+
+/* ===== TITLE ===== */
+h1{
+  text-align:center;
+  font-size:46px;
+  padding:22px 60px;
+  border-radius:30px;
+  border:6px solid #0ea5e9;
+  background:white;
+  display:inline-block;
+  animation:titlePop 1.4s ease;
+}
+
+@keyframes titlePop{
+  from{opacity:0; transform:scale(.7) translateY(-40px)}
+  to{opacity:1; transform:none}
+}
+
+.subtitle{
+  text-align:center;
+  font-size:22px;
+  margin:30px 0 80px;
+  color:#334155;
+}
+
+/* ===== GRID ===== */
+.grid{
+  display:flex;
+  flex-direction:column;
+  gap:90px;
+}
+
+/* ===== CARD ===== */
+.card{
+  padding:55px;
+  border-radius:36px;
+  box-shadow:0 30px 90px rgba(0,0,0,.18);
+  opacity:0;
+  transform:translateY(180px) scale(.88);
+  transition:transform 1.2s cubic-bezier(.16,1,.3,1),
+             box-shadow .8s ease;
+}
+
+.card.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+.card:hover{
+  transform:translateY(-18px) scale(1.04);
+  box-shadow:0 80px 160px rgba(0,0,0,.3);
+}
+
+/* ===== CARD COLORS ===== */
+.recognition{background:linear-gradient(135deg,#ecfeff,#cffafe)}
+.application{background:linear-gradient(135deg,#fef3c7,#fde68a)}
+.problem{background:linear-gradient(135deg,#fdf2f8,#fbcfe8)}
+
+/* ===== TEXT ===== */
+h2{font-size:34px;margin-bottom:18px;color:#0f172a}
+p{font-size:20px;line-height:1.8;color:#1e293b}
+
+.note{
+  margin-top:18px;
+  font-size:18px;
+  padding:18px;
+  border-radius:18px;
+  background:rgba(255,255,255,.7);
+}
+
+/* ===== TABLE ===== */
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:30px;
+  font-size:18px;
+}
+
+th,td{
+  padding:14px;
+  text-align:center;
+  border-radius:12px;
+}
+
+th{
+  background:#0ea5e9;
+  color:white;
+}
+
+td{
+  background:#e0f2fe;
+}
+
+/* ===== LIST CARDS ===== */
+.list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:26px;
+  margin-top:30px;
+}
+
+.item{
+  padding:26px;
+  border-radius:22px;
+  background:rgba(255,255,255,.8);
+  box-shadow:0 12px 30px rgba(0,0,0,.15);
+  font-size:18px;
+  transition:transform .6s ease;
+}
+
+.item:hover{transform:scale(1.06)}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+<center><h1>Applications & Recognition of Functions</h1></center>
+<div class="subtitle">
+Understanding how functions appear in data and real-world problems
+</div>
+
+<div class="grid">
+
+<!-- RECOGNITION FROM TABLE -->
+<div class="card recognition">
+<h2>📊 Recognition of Functions from Tables</h2>
+<p>
+A relation is a <b>function</b> if every input value corresponds to
+<b>exactly one output value</b>.
+Tables help us visually verify this condition.
+</p>
+
+<table>
+<tr>
+<th>x</th><th>f(x)</th>
+</tr>
+<tr><td>1</td><td>3</td></tr>
+<tr><td>2</td><td>5</td></tr>
+<tr><td>3</td><td>7</td></tr>
+<tr><td>4</td><td>9</td></tr>
+</table>
+
+<div class="note">
+✔ Each x-value has only one output → <b>This is a function</b>
+</div>
+</div>
+
+<!-- APPLICATIONS -->
+<div class="card application">
+<h2>🌍 Applications of Functions</h2>
+<p>
+Functions are mathematical models that describe how quantities depend
+on each other in real-life and engineering situations.
+</p>
+
+<div class="list">
+<div class="item">
+<b>📈 Linear Functions</b><br><br>
+Cost, speed, distance, wages
+</div>
+
+<div class="item">
+<b>🚀 Quadratic Functions</b><br><br>
+Projectile motion, physics trajectories
+</div>
+
+<div class="item">
+<b>🌱 Exponential Functions</b><br><br>
+Population growth, radioactive decay
+</div>
+
+<div class="item">
+<b>⚡ Rational Functions</b><br><br>
+Electrical circuits, signal processing
+</div>
+</div>
+
+<div class="note">
+Functions allow us to <b>predict outcomes</b> and
+<b>optimize real systems</b>.
+</div>
+</div>
+
+<!-- ROLE IN PROBLEM SOLVING -->
+<div class="card problem">
+<h2>🧠 Role of Functions in Problem Solving</h2>
+<p>
+Functions provide a structured way to break down complex problems into
+input-output relationships.
+</p>
+
+<div class="list">
+<div class="item">
+🔍 Identify variables and relationships
+</div>
+
+<div class="item">
+📐 Convert real situations into equations
+</div>
+
+<div class="item">
+📊 Analyze behavior using tables and formulas
+</div>
+
+<div class="item">
+🎯 Make accurate predictions and decisions
+</div>
+</div>
+
+<div class="note">
+In engineering, economics, science, and data analysis,
+<b>functions are the backbone of modeling</b>.
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+const cards=document.querySelectorAll('.card');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('show');
+  });
+},{threshold:.35});
+
+cards.forEach(c=>observer.observe(c));
+</script>
+
+</body>
+</html>
