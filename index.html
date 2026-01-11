@@ -159,6 +159,23 @@ h1{
 .green{border-left:7px solid var(--accent3)}
 .yellow{border-left:7px solid var(--accent4)}
 .red{border-left:7px solid #ef4444}
+  /*===== BACK HOME ====*/
+.center-btn {
+  display: block;              /* required for margin auto */
+  width: fit-content;
+  margin: 20px auto;           /* centers horizontally */
+  text-decoration: none;
+  padding: 12px 24px;
+  background-color: #2563eb;
+  color: white;
+  font-size: 18px;
+  border-radius: 8px;
+}
+
+.center-btn:hover {
+  background-color: #1e40af;
+}
+
 </style>
 </head>
 
@@ -212,7 +229,7 @@ h1{
 
 </div>
 </section>
-
+<a href="https://homepage-seven-sepia-99.vercel.app/"><button class="center-btn">⬅ Back Home</button></a>
 <script>
 /* ===== SCROLL REVEAL ===== */
 const sections = document.querySelectorAll('section');
@@ -238,5 +255,6 @@ sections.forEach(s=>observer.observe(s));
 
 </body>
 </html>
+
 
 
