@@ -123,6 +123,22 @@ p{font-size:19px;line-height:1.8}
 .graph:hover path{stroke-width:4}
 
 .axis-label{font-size:12px;fill:#334155;font-weight:bold}
+  	/*===== BACK HOME ====*/
+.center-btn {
+  display: block;              /* required for margin auto */
+  width: fit-content;
+  margin: 20px auto;           /* centers horizontally */
+  text-decoration: none;
+  padding: 12px 24px;
+  background-color: #2563eb;
+  color: white;
+  font-size: 18px;
+  border-radius: 8px;
+}
+
+.center-btn:hover {
+  background-color: #1e40af;
+}
 </style>
 </head>
 
@@ -202,7 +218,7 @@ p{font-size:19px;line-height:1.8}
 
 </div>
 </div>
-
+<a href="index.html"><button class="center-btn">⬅ Back </button></a>
 <script>
 const cards=document.querySelectorAll('.card');
 const observer=new IntersectionObserver(entries=>{
@@ -213,3 +229,4 @@ cards.forEach(c=>observer.observe(c));
 
 </body>
 </html>
+
